@@ -7,9 +7,9 @@ test('test case for user registration', async ({ page }) => {
     // Login    
     await page.locator('a[href="https://ecommerce-playground.lambdatest.io/index.php?route=account/account"]').nth(1).click();
     await page.locator('a[href="https://ecommerce-playground.lambdatest.io/index.php?route=account/register"]').nth(2).click();
-    await page.getByPlaceholder("First Name").fill("tora7");
-    await page.getByPlaceholder("Last Name").fill("tora7");
-    await page.getByPlaceholder("E-Mail").fill("tora7@gmail.com")
+    await page.getByPlaceholder("First Name").fill("tora8");
+    await page.getByPlaceholder("Last Name").fill("tora8");
+    await page.getByPlaceholder("E-Mail").fill("tora8@gmail.com")
     await page.getByPlaceholder("Telephone").fill("09876543212")
     await page.locator('#input-password').fill("Tora7@")
     await page.getByPlaceholder("Password Confirm").fill("Tora7@") 
