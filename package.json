@@ -4,15 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "runplaywrighttests" : "npx playwright test",
-    "runspecifictest": "npx playwright test tests/dashboard/test_dropdown_excerise2.spec.js --headed chrome",
-    "runplaywrightinchrome" : "npx playwright test --browser chrome",
-    "runplaywrightinedge ":  "npx playwright test --browser edge",
+    "runplaywrighttests": "npx playwright test",
+    "runspecifictest": "npx playwright test tests/test_handlingstatictables.spec.js --headed chrome",
+    "runplaywrightinchrome": "npx playwright test --browser chrome",
+    "runplaywrightinedge ": "npx playwright test --browser edge",
     "runplaywrightsafari": "npx playwright test --browser webkit",
     "runplaywrightheadedmode": "npx playwright test --headed",
     "generateplaywrightreport": "npx playwright show-report",
     "generatehtmlreport": "npx playwright show-report",
-    "runplaywrightparallel" : "npx playwright test --workers=4",
+    "runplaywrightparallel": "npx playwright test --workers=4",
     "runsmoketestcases": "npx playwright test --grep @smoke",
     "runregressionexcludesmoke": "npx playwright test --grep @regression --grep-invert @smoke"
   },
@@ -22,6 +22,10 @@
   "type": "module",
   "devDependencies": {
     "@playwright/test": "^1.58.2",
-    "@types/node": "^25.3.3"
+    "@types/node": "^25.3.3",
+    "allure-playwright": "^3.6.0"
+  },
+  "dependencies": {
+    "allure": "^0.0.0"
   }
 }
