@@ -121,3 +121,12 @@ test('TC3_Delete the existing job title', async ({page}) =>{
   
     })
 })
+
+
+// Define a fixture that skips login
+const testWithoutLogin = test.extend({
+    page: async ({ page }, use) => {
+        await use(page); // no login, just use the raw page
+    }
+});
+

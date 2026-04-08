@@ -1,6 +1,16 @@
 import {test,expect} from   '@playwright/test';
+import * as allure from "allure-js-commons";
 
 test('test case dropdown actions exercise' , async ({page}) => {
+
+    await allure.description("The test checks if an active user with a valid password can sign in to the app.");
+            await allure.epic("Signing in");
+            await allure.feature("Sign in with a password");
+            await allure.story("As an active user, I want to successfully sign in using a valid password");
+            await allure.tags("signin", "ui", "positive");
+            await allure.issue("https://github.com/allure-framework/allure-js/issues/331", "ISSUE-331");
+            await allure.owner("eroshenkoam");
+            await allure.parameter("browser", "chrome");
     await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
 
 

@@ -47,6 +47,7 @@ test.describe.configure({ mode: 'serial' });
 test.describe('OrangeHRM - Job Title List Module', () => {
 
     test.beforeEach(async ({ page }) => {
+        //if (skipBeforeEach) return;
         await login(page);
         await navigateToJobTitles(page);
     });
@@ -202,15 +203,25 @@ test.describe('OrangeHRM - Job Title List Module', () => {
     });
     
     //Modified by Rekha
+  
     test('TC23 - Edit form is pre-populated with existing job title data', async ({ page }) => {
+       await  test.step('Click edit button and verify pre-populated data', async ()=>{
         await page.locator('div.oxd-table-body div[role="row"]').first()
             .locator('button').nth(1).click();
-        const titleInput = page.locator('input[class="oxd-input oxd-input--active"]').last(); //the existing locator is pointing to 'Search' inputfield in the left menu panel, updated locator
-        //adding assertion the job title input field is visible before retrieving the value
-        await expect(titleInput).not.toBeEmpty();
-        let value = await titleInput.inputValue()
-        console.log(value)
-        expect(value.length).toBeGreaterThan(0);
+        })
+
+        await test.step('Verify the job title input field is pre-populated', async ()=>{
+            const titleInput = page.locator('input[class="oxd-input oxd-input--active"]').last(); //the existing locator is pointing to 'Search' inputfield in the left menu panel, updated locator
+            //adding assertion the job title input field is visible before retrieving the value
+            await expect(titleInput).not.toBeEmpty();
+            let value = await titleInput.inputValue()
+            console.log(value)
+            expect(value.length).toBeGreaterThan(0);
+
+            
+        })
+       
+        
     });
   
     //Modified by Rekha
@@ -360,7 +371,16 @@ test.describe('OrangeHRM - Job Title List Module', () => {
 
     // ── Navigation & Access Control ────────────────────────────────────────
 
-    
+    test('TC34 - Direct URL access to Job Titles page without login redirects to login', async ({ browser }) => {
+         // Create a  new browser context — no cookies, no session
+            const freshContext = await browser.newContext();
+            const freshPage = await freshContext.newPage();
+
+            await freshPage.goto(JOB_TITLES_URL);
+            await expect(freshPage).toHaveURL(LOGIN_URL);
+
+            await freshContext.close(); // clean up after test
+    });
 
     test('TC35 - Breadcrumb or page header shows correct module path', async ({ page }) => {
         await expect(page.locator('.oxd-topbar-header-breadcrumb')).toContainText('Admin');
@@ -421,7 +441,4 @@ test.describe('OrangeHRM - Job Title List Module', () => {
   
 
 });
-  test('TC34 - Direct URL access to Job Titles page without login redirects to login', async ({ page: newPage }) => {
-        await newPage.goto(JOB_TITLES_URL);
-        await expect(newPage).toHaveURL(LOGIN_URL);
-    });
+  
